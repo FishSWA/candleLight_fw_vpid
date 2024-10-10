@@ -2,6 +2,7 @@
 ## 改动内容
 - 通过读取特定GPIO电平，调整USB-PID，区分多个usb2can设备
 - GPIO电平通过外部拨码开关设置
+- 仅考虑对于STM32G431CBU6的兼容性
 
 
 # candleLight_gsusb
