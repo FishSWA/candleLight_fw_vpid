@@ -55,11 +55,11 @@ static const uint8_t USBD_GS_CAN_CfgDesc[USB_CAN_CONFIG_DESC_SIZ] =
 	USB_DESC_TYPE_CONFIGURATION,      /* bDescriptorType */
 	USB_CAN_CONFIG_DESC_SIZ,          /* wTotalLength */
 	0x00,
-	0x02,                             /* bNumInterfaces */
+	0x01,                             /* bNumInterfaces */
 	0x01,                             /* bConfigurationValue */
 	USBD_IDX_CONFIG_STR,              /* iConfiguration */
 	0x80,                             /* bmAttributes */
-	0x4B,                             /* MaxPower 150 mA */
+	0x00,                             /* MaxPower 150 mA */
 	/*---------------------------------------------------------------------------*/
 
 	/*---------------------------------------------------------------------------*/
@@ -97,28 +97,28 @@ static const uint8_t USBD_GS_CAN_CfgDesc[USB_CAN_CONFIG_DESC_SIZ] =
 	0x00,                             /* bInterval: */
 	/*---------------------------------------------------------------------------*/
 
-	/*---------------------------------------------------------------------------*/
-	/* DFU Interface Descriptor */
-	/*---------------------------------------------------------------------------*/
-	0x09,                             /* bLength */
-	USB_DESC_TYPE_INTERFACE,          /* bDescriptorType */
-	DFU_INTERFACE_NUM,                /* bInterfaceNumber */
-	0x00,                             /* bAlternateSetting */
-	0x00,                             /* bNumEndpoints */
-	0xFE,                             /* bInterfaceClass: Vendor Specific*/
-	0x01,                             /* bInterfaceSubClass */
-	0x01,                             /* bInterfaceProtocol : Runtime mode */
-	DFU_INTERFACE_STR_INDEX,          /* iInterface */
+	// /*---------------------------------------------------------------------------*/
+	// /* DFU Interface Descriptor */
+	// /*---------------------------------------------------------------------------*/
+	// 0x09,                             /* bLength */
+	// USB_DESC_TYPE_INTERFACE,          /* bDescriptorType */
+	// DFU_INTERFACE_NUM,                /* bInterfaceNumber */
+	// 0x00,                             /* bAlternateSetting */
+	// 0x00,                             /* bNumEndpoints */
+	// 0xFE,                             /* bInterfaceClass: Vendor Specific*/
+	// 0x01,                             /* bInterfaceSubClass */
+	// 0x01,                             /* bInterfaceProtocol : Runtime mode */
+	// DFU_INTERFACE_STR_INDEX,          /* iInterface */
 
-	/*---------------------------------------------------------------------------*/
-	/* Run-Time DFU Functional Descriptor */
-	/*---------------------------------------------------------------------------*/
-	0x09,                             /* bLength */
-	0x21,                             /* bDescriptorType: DFU FUNCTIONAL */
-	0x0B,                             /* bmAttributes: detach, upload, download */
-	0xFF, 0x00,                       /* wDetachTimeOut */
-	0x00, 0x08,                       /* wTransferSize */
-	0x1a, 0x01,                       /* bcdDFUVersion: 1.1a */
+	// /*---------------------------------------------------------------------------*/
+	// /* Run-Time DFU Functional Descriptor */
+	// /*---------------------------------------------------------------------------*/
+	// 0x09,                             /* bLength */
+	// 0x21,                             /* bDescriptorType: DFU FUNCTIONAL */
+	// 0x0B,                             /* bmAttributes: detach, upload, download */
+	// 0xFF, 0x00,                       /* wDetachTimeOut */
+	// 0x00, 0x08,                       /* wTransferSize */
+	// 0x1a, 0x01,                       /* bcdDFUVersion: 1.1a */
 
 };
 
@@ -688,7 +688,7 @@ USBD_ClassTypeDef USBD_GS_CAN = {
 	.GetHSConfigDescriptor = USBD_GS_CAN_GetCfgDesc,
 	.GetFSConfigDescriptor = USBD_GS_CAN_GetCfgDesc,
 	.GetOtherSpeedConfigDescriptor = USBD_GS_CAN_GetCfgDesc,
-	.GetUsrStrDescriptor = USBD_GS_CAN_GetStrDesc,
+	.GetUsrStrDescriptor = USBD_GS_CAN_GetStrDesc,	
 };
 
 uint8_t USBD_GS_CAN_Init(USBD_GS_CAN_HandleTypeDef *hcan, USBD_HandleTypeDef *pdev)
