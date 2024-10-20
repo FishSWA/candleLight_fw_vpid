@@ -45,11 +45,15 @@ THE SOFTWARE.
 #include "usbd_gs_can.h"
 #include "util.h"
 
+#include "usbd_desc.h"
+
 void HAL_MspInit(void);
 static void SystemClock_Config(void);
 
 static USBD_GS_CAN_HandleTypeDef hGS_CAN;
 static USBD_HandleTypeDef hUSB = {0};
+
+void USBD_CDC_DeviceDesc_Change(uint16_t vid, uint16_t pid);
 
 void __weak _close(void) {
 }
@@ -67,6 +71,15 @@ int main(void)
 
 	gpio_init();
 	timer_init();
+
+	/*根据GPIO值配置USB PID和VID， 根据ADDR1~4产生16种PID，VID始终为0xAEEE*/
+	uint16_t vid = 0xAEEE;
+	uint16_t pid = 0x0000;
+	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) << 0;
+	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) << 1;
+	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2) << 2;
+	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) << 3;
+	USBD_CDC_DeviceDesc_Change(vid, pid);
 
 	INIT_LIST_HEAD(&hGS_CAN.list_frame_pool);
 	INIT_LIST_HEAD(&hGS_CAN.list_to_host);
@@ -131,6 +144,15 @@ int main(void)
 			dfu_run_bootloader();
 		}
 	}
+}
+
+//一个可以中途修改USBD_CDC_DeviceDesc中USBD_VID和USBD_PID的函数
+void USBD_CDC_DeviceDesc_Change(uint16_t vid, uint16_t pid)
+{
+  USBD_FS_DeviceDesc[8] = LOBYTE(vid);
+  USBD_FS_DeviceDesc[9] = HIBYTE(vid);
+  USBD_FS_DeviceDesc[10] = LOBYTE(pid);
+  USBD_FS_DeviceDesc[11] = HIBYTE(pid);
 }
 
 void HAL_MspInit(void)

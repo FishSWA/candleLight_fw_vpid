@@ -49,9 +49,9 @@ THE SOFTWARE.
 #define USBD_INTERFACE_STRING_FS	 "gs_usb interface"
 
 #if defined(BOARD_candleLight)
-	#define USBD_PRODUCT_STRING_FS	 "candleLight USB to CAN adapter"
-	#define USBD_MANUFACTURER_STRING "bytewerk"
-	#define DFU_INTERFACE_STRING_FS	 "candleLight firmware upgrade interface"
+	#define USBD_PRODUCT_STRING_FS	 "USB2CAN adapter"
+	#define USBD_MANUFACTURER_STRING "GKD Robotics"
+	#define DFU_INTERFACE_STRING_FS	 "upgrede interface Removed"
 
 	#define TIM2_CLOCK_SPEED		 48000000
 

@@ -94,6 +94,17 @@ void gpio_init(void)
 	__HAL_RCC_GPIOD_CLK_ENABLE();
 #endif
 
+  /*地址配置GPIO初始化 */
+  //ADD1 PA0
+  //ADD2 PA1
+  //ADD3 PA2
+  //ADD4 PA3
+  /*Configure GPIO pins : PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
 #ifdef CAN_S_Pin
 	HAL_GPIO_WritePin(CAN_S_GPIO_Port, CAN_S_Pin, GPIO_PIN_SET);
 	GPIO_InitStruct.Pin = CAN_S_Pin;

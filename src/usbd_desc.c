@@ -53,7 +53,7 @@ const USBD_DescriptorsTypeDef FS_Desc = {
 __ALIGN_BEGIN uint8_t USBD_DescBuf[USBD_DESC_BUF_SIZE] __ALIGN_END;
 
 /* USB_DeviceDescriptor */
-static const uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] = {
+uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] = {
 	0x12,                       /* bLength */
 	USB_DESC_TYPE_DEVICE,       /* bDescriptorType */
 	0x00,                       /* bcdUSB */
