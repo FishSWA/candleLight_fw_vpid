@@ -73,12 +73,12 @@ int main(void)
 	timer_init();
 
 	/*根据GPIO值配置USB PID和VID， 根据ADDR1~4产生16种PID，VID始终为0xAEEE*/
-	uint16_t vid = 0xAEEE;
-	uint16_t pid = 0x0000;
-	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) << 0;
-	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) << 1;
-	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2) << 2;
-	pid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) << 3;
+	uint16_t vid = 0x0000;
+	uint16_t pid = 0x606F;
+	vid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) << 0;
+	vid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) << 1;
+	vid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2) << 2;
+	vid |= HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3) << 3;
 	USBD_CDC_DeviceDesc_Change(vid, pid);
 
 	INIT_LIST_HEAD(&hGS_CAN.list_frame_pool);
